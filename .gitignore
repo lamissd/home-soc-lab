@@ -1,0 +1,10 @@
+*.iso
+*.ova
+*.vdi
+*.vmdk
+*.log
+*.pcap
+*.key
+*.pem
+.env
+passwords.txt
