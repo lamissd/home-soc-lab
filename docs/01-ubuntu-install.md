@@ -18,7 +18,7 @@ Create the VM that will host the Wazuh SIEM.
 5. Took a snapshot before cloning.
 
 ## Result
-![wazuh-server network](images/04-ubuntu-ip.png)
+![wazuh-server network](vmipa.png)
 
 ## Problems encountered
 - **Symptom:** keyboard was QWERTY.
