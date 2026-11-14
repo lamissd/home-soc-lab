@@ -62,8 +62,8 @@ home-soc-lab/
 - [x] Repository created
 - [x] NAT Network configured
 - [x] Ubuntu Server VMs created
-- [ ] Wazuh installed
-- [ ] Agent deployed on victim
+- [x] Wazuh installed
+- [x] Agent deployed on victim
 - [ ] Attack scenarios executed
 - [ ] Custom detection rules written
 - [ ] MITRE ATT&CK mapping completed
