@@ -61,7 +61,7 @@ home-soc-lab/
 
 - [x] Repository created
 - [x] NAT Network configured
-- [ ] Ubuntu Server VMs created
+- [x] Ubuntu Server VMs created
 - [ ] Wazuh installed
 - [ ] Agent deployed on victim
 - [ ] Attack scenarios executed
