@@ -52,6 +52,8 @@ Install Wazuh (manager, indexer and dashboard) on `wazuh-server` with the offici
 - Take a snapshot before any large install.
 - Rule out hypotheses with measurements instead of guessing.
 
+![No space left error](redoinstallation.png)
+
 ## Result
 To be added once the dashboard opens (a screenshot of the login page and the home page, without the password).
 
