@@ -41,3 +41,33 @@ Connect all lab machines to an isolated NAT Network so they can reach each other
 ## Problems encountered
 - The first pings froze with no output. The cause was a typo: I typed `-C` (capital) instead of `-c` (lowercase). Fixed by using `ping -c 3 10.0.2.3`.
 - Latency to the Internet was high (180 to 690 ms), caused by my Internet connection, not by the lab.
+
+- # Victim machine
+
+## Goal
+Create a second Ubuntu Server VM that will be monitored by Wazuh and attacked from Kali.
+
+## Creation
+`victim` was created by cloning `wazuh-server` (full clone, MAC address reinitialized) before installing Wazuh, so it stays light and clean.
+
+- RAM: 1 GB, CPU: 1
+- Network: NAT Network `soc-lab`
+- Hostname: `victim` (set with `hostnamectl set-hostname victim`)
+- Keyboard: French AZERTY
+
+## Network check
+`victim` has its own address on the lab network, different from `wazuh-server` (`10.0.2.3`).
+
+![victim IP address](victimip.png)
+
+Kali reaches it with 3 replies and 0% packet loss, which confirms that the attacker and the target can communicate.
+
+![Kali pings victim](pingvictim.png)
+
+## Problems encountered
+- Clone was disabled in VirtualBox until the VM was fully powered off.
+- The keyboard went back to QWERTY on the clone because `loadkeys` is temporary. Fixed with `dpkg-reconfigure keyboard-configuration`.
+- The VM clock was wrong after the clone, so I checked it with `date` and corrected it with `timedatectl set-time`.
+
+## Next
+Install the Wazuh agent and check that `victim` appears as Active in the dashboard.
