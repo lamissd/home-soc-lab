@@ -4,7 +4,7 @@ This table lists the attacks I will run from Kali against `victim`, and what I f
 
 | # | Attack | Tool | MITRE technique | Wazuh detected? | Notes |
 |---|---|---|---|---|---|
-| 1 | Port scan | Nmap | T1046 | | |
+| 1 | Port scan | Nmap | T1046 | No | Ran at 23:41. The 8 events in that window (Valid Accounts, Remote Services, 2x Authentication success) correspond to my own SSH login to victim, not the scan itself. Nmap -sV generates no authentication or file-integrity activity, so Wazuh's default rules don't detect it. Would need a network IDS (e.g. Suricata) integration to catch port scans. |
 | 2 | SSH brute force | Hydra | T1110 | | |
 | 3 | Successful login | ssh | T1078 | | |
 | 4 | Privilege escalation | sudo | T1548 | | |
