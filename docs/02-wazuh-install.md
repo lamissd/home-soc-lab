@@ -54,6 +54,23 @@ Install Wazuh (manager, indexer and dashboard) on `wazuh-server` with the offici
 
 ![No space left error](redoinstallation.png)
 
+### 6. Hypothesis: the VM was under-resourced
+
+After three failed installs at the same step, I considered switching to the pre-built OVA. Before doing that, I decided to test a resource hypothesis: my VM (6 GB RAM, 25 GB disk) was below Wazuh's recommended resources, which may have caused the download or the install to fail.
+
+**What I changed**
+- Enlarged the virtual disk from 25 GB to 50 GB, then extended the partition and the filesystem (`growpart`, `resize2fs`).
+- Raised the RAM from 6 GB to 8 GB.
+- Added a 4 GB swap file.
+
+**How I measured it**
+- A loop recorded `free -h` and `df -h /` every 15 seconds during the install into `watch.log`.
+- I took a snapshot (`Clean before Wazuh`) before the new attempt, so a failure would cost seconds.
+
+**Result:** (fill in: it worked, or it failed with this error, and what the recorder showed)
+
+**Decision:** (fill in: keep this setup, or switch to the OVA)
+
 ## Result
 To be added once the dashboard opens (a screenshot of the login page and the home page, without the password).
 
