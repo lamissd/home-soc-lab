@@ -26,7 +26,18 @@ Filtered `agent.name: victim`, narrowed to 13:21-13:25. Found 3 events: 1 Authen
 ![Wazuh dashboard after privilege escalation](sshwazuh.png)
 ![Sudo event detail](eventssudossh.png)
 
-Rule IDs/descriptions: [fill in]
+## Checking Wazuh
+Filtered `agent.name: victim`, narrowed to 13:21-13:25. Found exactly 3 events, all at 13:24:57, all level 3:
+
+| Rule ID | Description |
+|---|---|
+| 5501 | PAM: Login session opened |
+| 5402 | Successful sudo to ROOT executed |
+| 5502 | PAM: Login session closed |
+
+![Wazuh events table](images/34-wazuh-after-privesc.png)
+
+These three events correspond exactly to the SSH login, the `sudo whoami` command, and the session ending.
 
 ## Conclusion
 Wazuh detected both the login and the sudo usage by default, no custom rules needed. This is expected since authentication and sudo commands are both written to standard logs (`auth.log`), which Wazuh monitors out of the box.
