@@ -41,6 +41,16 @@ Filtered `agent.name: victim`, narrowed the time range to the minutes around bot
 ## Conclusion
 **Wazuh did not detect this attack.** Unlike the SSH brute force and privilege escalation (attacks 2-3), which write to `/var/log/auth.log` and are covered by default log analysis, these persistence techniques modify files (`/etc/passwd`, `/etc/shadow`, cron files) that are not watched by Wazuh's default File Integrity Monitoring (FIM) configuration.
 
+## Understanding the tools
+
+Before running this attack, I made sure I understood what each command actually does, not just copying it:
+
+- **`useradd`**: creates a new Linux user account. The `-m` flag creates a home directory, and `-s /bin/bash` gives it a usable shell so it can actually log in. Combined with `passwd`, this creates a fully functional backup account, an attacker's "spare key" that survives even if the originally compromised account is secured.
+
+- **Cron / crontab**: Linux's built-in task scheduler, similar to Windows Task Scheduler. A crontab entry like `*/5 * * * *` means "run this every 5 minutes." Attackers use cron jobs to make malicious activity survive a reboot or automatically re-establish access, even after the initial breach is noticed and partially cleaned up.
+
+Both techniques fall under the MITRE ATT&CK **Persistence** tactic (TA0003): the goal isn't to get in, it's to make sure getting back in doesn't depend on the original vulnerability still being open.
+
 See the full analysis in [detections/04-persistence-detection-gap.md](../detections/04-persistence-detection-gap.md).
 
 ## Lesson learned
