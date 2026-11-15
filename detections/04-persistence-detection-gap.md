@@ -15,7 +15,7 @@ Checked the current FIM configuration on `wazuh-server`:
 sudo cat /var/ossec/etc/ossec.conf | grep -A 3 "<directories"
 ```
 
-[paste the relevant output here, or a screenshot]
+![FIM configuration check](FIMconfigcheck.png)
 
 ## Why this matters
 This is a realistic and known blind spot. An attacker who gains initial access (as simulated in attacks 2-3, both of which were detected) can create persistence mechanisms that go completely unnoticed unless FIM is specifically configured to watch the right paths. A SIEM that catches the break-in but misses the backdoor gives a false sense of security.
