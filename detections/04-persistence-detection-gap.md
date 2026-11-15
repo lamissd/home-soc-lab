@@ -1,7 +1,7 @@
 # Detection gap: Persistence via new user and cron job (T1136, T1053)
 
 ## What happened
-I created a backup user account and a cron job on `victim` (see [attacks/04-persistence.md](persistencecronjob1.md)). No alert appeared in Wazuh for either action.
+I created a backup user account and a cron job on `victim` (see [attacks/04-persistence.md](../attacks/04-persistence.md)). No alert appeared in Wazuh for either action.
 
 ## MITRE ATT&CK techniques
 - T1136 - Create Account
