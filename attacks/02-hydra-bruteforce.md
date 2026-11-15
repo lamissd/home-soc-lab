@@ -41,6 +41,15 @@ Result: 5 "Authentication failure" events (one per wrong password) and 1 "Authen
 ## Conclusion
 **Wazuh detected this attack.** Unlike the Nmap scan, SSH brute forcing directly generates authentication log entries, which is exactly what Wazuh's default rules watch for.
 
+## Understanding the tool
+
+Before running this, I made sure I understood what Hydra does:
+
+- **Hydra** is a login-cracking tool: given a username (or list of usernames) and a list of passwords, it systematically tries each combination against a service, here, SSH, until one works or the list is exhausted.
+- The `-l` flag specifies a single username, `-P` points to a password wordlist, and `-t` controls how many parallel connection attempts run at once (SSH servers often rate-limit this, which is why Hydra itself warned me to reduce it).
+
+This maps to MITRE ATT&CK **T1110 - Brute Force**, part of the **Credential Access** tactic: gaining valid credentials by systematically guessing them, rather than exploiting a software flaw.
+
 ## Lesson learned
 - A wide time range in the dashboard can mix multiple sessions together. Narrowing to the exact attack window matters for accurate documentation.
 - My own troubleshooting mistakes (wrong username, placeholder password) still left real log traces, a reminder that even "failed" attack attempts are visible to a SIEM.
