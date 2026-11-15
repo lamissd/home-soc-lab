@@ -35,5 +35,14 @@ This is expected: Wazuh's default setup analyzes logs and file integrity, not ra
 ## What would catch this
 A network-based IDS such as Suricata, which Wazuh can integrate with, inspects raw traffic and could flag a port scan pattern (many connections to different ports in a short time) even without any failed login.
 
+## Understanding the tool
+
+Before running this, I made sure I understood what Nmap actually does:
+
+- **Nmap** sends probe packets to a range of ports on a target and reads how it responds to determine which ports are **open** (something is listening), **closed** (nothing listening, but the host responds), or **filtered** (no response, often a firewall).
+- The `-sV` flag adds **version detection**: for each open port, Nmap tries to identify the exact software and version running (e.g., "OpenSSH 8.9"), which is valuable to an attacker looking for known vulnerabilities tied to a specific version.
+
+This maps to MITRE ATT&CK **T1046 - Network Service Discovery**, part of the **Discovery** tactic: before trying to break in, an attacker first maps out what's actually running on the target.
+
 ## Lesson learned
 An alert appearing near the time of an attack doesn't mean it's related to that attack. I had to read the actual log entries (not just the dashboard charts) to confirm the 8 events were my own SSH session, not the scan.
