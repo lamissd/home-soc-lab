@@ -4,7 +4,9 @@
 Hydra brute-forced victim's SSH password (see [attacks/02-hydra-bruteforce.md](../attacks/02-hydra-bruteforce.md)). Wazuh logged 5 "Authentication failure" events and 1 "Authentication success" event.
 
 ## Which rule caught it
-(Fill in once you've expanded an event in the dashboard and noted the exact rule ID/name and description, e.g. "Rule 5710: sshd authentication failed")
+Rule ID: [fill in], Description: "[fill in]"
+
+![SSH brute force rule detail](wazuhbruteforcerule.png)
 
 ## Why this worked by default
 Failed and successful SSH logins are written directly to `/var/log/auth.log`, which Wazuh's agent reads and forwards. This falls squarely into Wazuh's default log-analysis scope, no extra configuration was needed.
