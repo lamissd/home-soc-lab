@@ -41,4 +41,4 @@ These three events correspond exactly to the SSH login, the `sudo whoami` comman
 Wazuh detected both the login and the sudo usage by default, no custom rules needed. This is expected since authentication and sudo commands are both written to standard logs (`auth.log`), which Wazuh monitors out of the box.
 
 ## Note
-Unlike a real privilege escalation exploit, `lamis` already had full sudo rights, so this step didn't exploit a vulnerability, it demonstrated what an attacker gains once they have valid credentials for an account with existing admin privileges.
+The raw events show PAM session rules (5501, 5502) rather than a distinct "sshd: authentication success" rule, Wazuh appears to categorize this particular login flow under PAM session tracking rather than a separate auth-success rule.
