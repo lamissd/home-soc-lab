@@ -17,3 +17,4 @@ After each attack, I'll check the Wazuh dashboard (Security Events) filtered to 
 - A short note on what I think explains the result
 
 - - [Attack 1: Nmap port scan](01-nmap-scan.md)
+- - [Attack 2: SSH brute force with Hydra](attacks/02-hydra-bruteforce.md)
