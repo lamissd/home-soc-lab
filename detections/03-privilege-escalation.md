@@ -35,8 +35,6 @@ Filtered `agent.name: victim`, narrowed to 13:21-13:25. Found exactly 3 events, 
 | 5402 | Successful sudo to ROOT executed |
 | 5502 | PAM: Login session closed |
 
-![Wazuh events table](images/34-wazuh-after-privesc.png)
-
 These three events correspond exactly to the SSH login, the `sudo whoami` command, and the session ending.
 
 ## Conclusion
