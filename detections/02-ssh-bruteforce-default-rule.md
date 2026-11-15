@@ -4,7 +4,7 @@
 Hydra brute-forced victim's SSH password (see [attacks/02-hydra-bruteforce.md](../attacks/02-hydra-bruteforce.md)). Wazuh logged 5 "Authentication failure" events and 1 "Authentication success" event.
 
 ## Which rule caught it
-Rule ID: [fill in], Description: "[fill in]"
+Rule level: 5, Description: "sshd authentication failed."
 
 ![SSH brute force rule detail](wazuhbruteforcerule.png)
 
