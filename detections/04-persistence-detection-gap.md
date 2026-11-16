@@ -29,4 +29,18 @@ Add the relevant paths to the `<syscheck>` section of `ossec.conf` on `wazuh-ser
 Then restart the Wazuh manager (and the agent's FIM scan) and re-run the persistence attack to confirm detection.
 
 ## Status
-Gap confirmed and documented. Fix implemented and re-tested: see [05-fim-fix-verification.md](05-fim-fix-verification.md).
+**Gap confirmed, then fixed and verified.**
+
+Initial fix attempt failed because I edited the Wazuh **manager's** own `ossec.conf`, which only controls what the manager watches on itself, not what agents watch on monitored endpoints. The correct fix required editing the **shared agent configuration** (`/var/ossec/etc/shared/default/agent.conf`), which Wazuh pushes to all connected agents.
+
+After correcting this and restarting both the manager and the agent, re-running the attack confirmed detection:
+
+```
+** Alert: syscheck,syscheck_entry_modified,syscheck_file,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,hipaa_164.312.c.1,...
+File '/etc/passwd' modified
+```
+
+Confirmed via the raw alerts log (`/var/ossec/logs/alerts/alerts.log`) at 22:02:03, matching the exact moment I ran `useradd -m -s /bin/bash backdoor4`.
+
+## Lesson learned
+Wazuh distinguishes between the **manager's own FIM config** and the **shared configuration pushed to agents**. Editing the wrong one silently has no effect on what agents actually monitor, there's no error, it just doesn't work. This is an easy and realistic mistake to make when first configuring centralized monitoring for multiple endpoints.
