@@ -36,6 +36,8 @@ All machines run in VirtualBox on an isolated NAT Network (`soc-lab`, `10.0.2.0/
 
 Architecture diagram: *coming soon* (`docs/images/`).
 
+[View the architecture diagram](docs/architecture.html)
+
 ## Attack Scenarios (planned)
 
 1. Network scan (Nmap)
