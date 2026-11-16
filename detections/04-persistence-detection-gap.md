@@ -42,5 +42,16 @@ File '/etc/passwd' modified
 
 Confirmed via the raw alerts log (`/var/ossec/logs/alerts/alerts.log`) at 22:02:03, matching the exact moment I ran `useradd -m -s /bin/bash backdoor4`.
 
+The cron job test confirmed detection as well, with a dedicated rule:
+
+```
+** Alert: syslog,cron,pci_dss_10.2.7,pci_dss_10.6.1,gpg13_4.13,gdpr_IV_35.7.d,hipaa_164.312.b,nist_800_53_AU.14,nist_800_53_AU.6,...
+Rule: 2832 (level 5) -> 'Crontab entry changed.'
+```
+
+This rule is more specific than the generic `syscheck_entry_modified` alert that caught the `/etc/passwd` change, it's purpose-built to flag crontab modifications, confirming Wazuh has dedicated detection logic for this persistence technique once the file path is actually being monitored.
+
+**Both persistence techniques tested in attack 4 are now detected by Wazuh.**
+
 ## Lesson learned
 Wazuh distinguishes between the **manager's own FIM config** and the **shared configuration pushed to agents**. Editing the wrong one silently has no effect on what agents actually monitor, there's no error, it just doesn't work. This is an easy and realistic mistake to make when first configuring centralized monitoring for multiple endpoints.
