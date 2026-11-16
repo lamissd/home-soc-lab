@@ -8,8 +8,8 @@ This table lists the attacks I will run from Kali against `victim`, and what I f
 | 2 | SSH brute force | Hydra | T1110 | Yes | Ran at 00:28. 5 failed attempts then 1 success (password "wazuh"). Wazuh logged each failure and the success as separate "Authentication" events. || 3 | Successful login | ssh | T1078 | | |
 | 3 | Successful login | ssh | T1078 | Yes | Logged in as lamis using credentials found via Hydra. Detected via PAM session rules (5501). |
 | 4 | Privilege escalation | sudo | T1548 | Yes | Ran `sudo whoami` at 13:24, confirmed root access. Detected: rule 5402 "Successful sudo to ROOT executed". |
-| 5 | Persistence: new user | useradd | T1136 | No | Created user "backdoor". No alert appeared, /etc/passwd not in default FIM watch list. |
-| 6 | Persistence: cron job | crontab | T1053 | No | Added cron job. No alert appeared, cron files not in default FIM watch list. |
+| 5 | Persistence: new user | useradd | T1136 | Yes (after fix) | Initially missed, /etc/passwd not watched by default. Fixed via shared agent FIM config. Confirmed detection: syscheck_entry_modified alert. |
+| 6 | Persistence: cron job | crontab | T1053 | Yes (after fix) | Initially missed. Fixed via shared agent FIM config. Confirmed detection: Rule 2832 "Crontab entry changed." |
 ## How I'll fill this in
 After each attack, I'll check the Wazuh dashboard (Security Events) filtered to the `victim` agent, and write:
 - **Yes** if an alert appeared, with the rule name
