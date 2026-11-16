@@ -64,9 +64,9 @@ home-soc-lab/
 - [x] Ubuntu Server VMs created
 - [x] Wazuh installed
 - [x] Agent deployed on victim
-- [ ] Attack scenarios executed
-- [ ] Custom detection rules written
-- [ ] MITRE ATT&CK mapping completed
+- [x] Attack scenarios executed
+- [x] Custom detection rules written
+- [x] MITRE ATT&CK mapping completed
 - [ ] Final write-up
 
 ## Legal and Ethical Notice
