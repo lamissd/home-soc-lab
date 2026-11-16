@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home SOC Lab — Architecture</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #F1EFE8;
+    --text: #2C2C2A;
+    --muted: #5F5E5A;
+    --border: #B4B2A9;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --card: #26211c;
+      --text: #ECEAE2;
+      --muted: #b4b2a9;
+      --border: #44443f;
+    }
+  }
+  body {
+    margin: 0;
+    padding: 24px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { text-align: center; font-size: 16px; font-weight: 500; color: var(--muted); margin-bottom: 20px; }
+  svg { width: 100%; height: auto; display: block; }
+  .box { cursor: default; transition: filter .15s; }
+  .box:hover { filter: brightness(1.05); }
+  .legend {
+    margin-top: 16px; padding: 16px; border: 1px solid var(--border); border-radius: 12px;
+    font-size: 14px; line-height: 1.6;
+  }
+  .legend b { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Home SOC Lab — Architecture</h1>
+  <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg">
+    <rect x="30" y="30" width="840" height="380" rx="24" fill="var(--card)" stroke="var(--border)"/>
+    <text x="56" y="68" font-size="20" font-weight="600" fill="var(--text)">soc-lab NAT Network</text>
+    <text x="56" y="92" font-size="14" fill="var(--muted)">10.0.2.0/24 - isolated - VirtualBox</text>
+
+    <g class="box">
+      <rect x="80" y="160" width="200" height="110" rx="16" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/>
+      <text x="180" y="202" font-size="19" font-weight="600" fill="#4A1B0C" text-anchor="middle">Kali Linux</text>
+      <text x="180" y="228" font-size="14" fill="#712B13" text-anchor="middle">Attacker</text>
+      <text x="180" y="248" font-size="13" fill="#712B13" text-anchor="middle">10.0.2.15</text>
+    </g>
+
+    <g class="box">
+      <rect x="350" y="160" width="200" height="110" rx="16" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+      <text x="450" y="196" font-size="19" font-weight="600" fill="#04342C" text-anchor="middle">wazuh-server</text>
+      <text x="450" y="222" font-size="14" fill="#085041" text-anchor="middle">SIEM / Manager</text>
+      <text x="450" y="242" font-size="13" fill="#085041" text-anchor="middle">10.0.2.3 - 8 GB RAM</text>
+    </g>
+
+    <g class="box">
+      <rect x="620" y="160" width="200" height="110" rx="16" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+      <text x="720" y="202" font-size="19" font-weight="600" fill="#26215C" text-anchor="middle">victim</text>
+      <text x="720" y="228" font-size="14" fill="#3C3489" text-anchor="middle">Ubuntu + Wazuh agent</text>
+      <text x="720" y="248" font-size="13" fill="#3C3489" text-anchor="middle">10.0.2.4</text>
+    </g>
+
+    <path d="M280 200 C 400 130, 580 130, 620 200" fill="none" stroke="#D85A30" stroke-width="2" marker-end="url(#arrow-r)"/>
+    <text x="450" y="128" font-size="14" font-weight="600" fill="#712B13" text-anchor="middle">Nmap - Hydra - SSH</text>
+
+    <path d="M650 270 C 590 330, 500 330, 460 272" fill="none" stroke="#0F6E56" stroke-width="2" marker-end="url(#arrow-g)"/>
+    <text x="555" y="348" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Wazuh agent logs</text>
+
+    <defs>
+      <marker id="arrow-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M1 1L9 5L1 9" fill="none" stroke="#D85A30" stroke-width="1.6"/>
+      </marker>
+      <marker id="arrow-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M1 1L9 5L1 9" fill="none" stroke="#0F6E56" stroke-width="1.6"/>
+      </marker>
+    </defs>
+  </svg>
+
+  <div class="legend">
+    <div><b>Detected by default:</b> SSH brute force, login, sudo to root</div>
+    <div><b>Missed, then fixed via FIM config:</b> Nmap scan (gap remains), new user, cron persistence</div>
+  </div>
+</div>
+</body>
+</html>
