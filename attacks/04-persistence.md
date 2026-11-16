@@ -51,6 +51,8 @@ Before running this attack, I made sure I understood what each command actually 
 
 Both techniques fall under the MITRE ATT&CK **Persistence** tactic (TA0003): the goal isn't to get in, it's to make sure getting back in doesn't depend on the original vulnerability still being open.
 
+## Update: gap closed
+After identifying this detection gap, I fixed it by configuring Wazuh's shared agent FIM settings to watch `/etc/passwd`, `/etc/shadow`, and `/var/spool/cron/crontabs`. Re-testing confirmed both persistence techniques are now detected. Full details in [detections/04-persistence-detection-gap.md](../detections/04-persistence-detection-gap.md).
 See the full analysis in [detections/04-persistence-detection-gap.md](../detections/04-persistence-detection-gap.md).
 
 ## Lesson learned
